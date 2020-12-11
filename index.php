@@ -237,6 +237,30 @@ switch ($action){
         break;
     }
 
+    case 'delete_question': {
+        $questionId = filter_input(INPUT_POST, 'questionId');
+        $userId = filter_input(INPUT_POST, 'userId');
+        if ($questionId == NULL || $userId == NULL) {
+            $error = 'Both fields are required';
+            include('errors/error.php');
+        } else {
+            delete_question($questionId);
+            header("Location: .?action=display_questions&userId=$userId");
+        }
+
+        break;
+    }
+
+    case 'edit_question': {
+
+        break;
+
+    }
+
+    case 'get_one_question' : {
+        break;
+    }
+
     default:{
         $error = 'Unknown Action';
         include ('errors/error.php');

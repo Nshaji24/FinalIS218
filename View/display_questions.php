@@ -20,7 +20,15 @@
         <td> <?php echo $question['title'];?> </td>
         <td> <?php echo $question['body'];?> </td>
         <td> <?php echo $question['skills'];?> </td>
+        <td>
+        <form action="index.php" method="post" name="delete_button" class="deleteBTN">
+            <input type="hidden" name="action" value="delete_question">
+            <input type="hidden" name="questionId" value="<?php echo $question['id']; ?>">
+            <input type="hidden" name="userId" value="<?php echo $userId; ?>">
 
+            <input type="submit" value="DELETE">
+        </td>
+        </form>
     </tr>
     <?php endforeach; ?>
 </table>
