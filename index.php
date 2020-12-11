@@ -252,12 +252,26 @@ switch ($action){
     }
 
     case 'edit_question': {
+        $questionId = filter_input(INPUT_POST, 'questionId');
+        $userId= filter_input(INPUT_POST,'userId');
+        $title= filter_input(INPUT_POST,'title');
+        $body= filter_input(INPUT_POST,'body');
+        $skills= filter_input(INPUT_POST,'skills');
+        if ($userId == NULL || $title == NULL || $body == NULL || $skills == NULL) {
+            $error = 'All fields are required';
+            include('errors/error.php');
+        } else {
+            edit_question($title, $body, $skills, $questionId);
+            header("Location: .?action=display_questions&userId=$userId");
+        }
 
         break;
 
     }
 
-    case 'get_one_question' : {
+    case 'get_all_questions' : {
+        $questions = get_all_questions();
+        include ('View/display_questions.php');
         break;
     }
 
