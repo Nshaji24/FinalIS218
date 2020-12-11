@@ -197,6 +197,7 @@ switch ($action){
 
     case 'display_registration':{
         include('View/registration.php');
+
         break;
 
     }
@@ -245,7 +246,7 @@ switch ($action){
             include('errors/error.php');
         } else {
             delete_question($questionId);
-            header("Location: .?action=display_questions&userId=$userId");
+            header("Location: .?action=display_question&userId=$userId");
         }
 
         break;
@@ -259,10 +260,10 @@ switch ($action){
         $skills= filter_input(INPUT_POST,'skills');
         if ($userId == NULL || $title == NULL || $body == NULL || $skills == NULL) {
             $error = 'All fields are required';
-            include('errors/error.php');
-        } else {
+           include('errors/error.php');
+       } else {
             edit_question($title, $body, $skills, $questionId);
-            header("Location: .?action=display_questions&userId=$userId");
+            header("Location: .?action=display_question_form&userId=$userId");
         }
 
         break;

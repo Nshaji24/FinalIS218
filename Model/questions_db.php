@@ -52,15 +52,13 @@ function get_one_question($questionId){
     $statement = $db->prepare($query);
     $statement->bindValue(':questionId', $questionId);
     $statement->execute();
-
     $question = $statement->fetch();
-
     $statement->closeCursor();
     return $question;
 
 }
 
-function edit_question ($title, $body, $skills, $questionID) {
+function edit_question ($title, $body, $skills, $questionId) {
     global $db;
 
     $query = 'UPDATE questions
