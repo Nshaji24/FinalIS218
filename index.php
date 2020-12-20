@@ -1,6 +1,7 @@
 
 <?php
 require ('Model/database.php');
+require ('Model/accounts.php');
 require ('Model/accounts_db.php');
 require ('Model/questions_db.php');
 require ('Model/Registration.php');
@@ -38,7 +39,8 @@ switch ($action){
             $error ='email and password not included';
             include ('errors/error.php');
         }else{
-            $userId = validate_login($Email,$Password);
+            $user = AccountsDB::validate_login($Email,$Password);
+            $userId = $user->getId();
             if ($userId == false) {
                 header('Location: .?action=display_registration');
             } else {
