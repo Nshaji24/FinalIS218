@@ -300,6 +300,19 @@ switch ($action){
         break;
     }
 
+    case 'view_single_question': {
+        $questionId = filter_input(INPUT_POST,'questionId');
+        $userId = filter_input(INPUT_POST,'userId');
+        if ($questionId==NULL || $userId==NULL) {
+            $error = 'All Fields are required';
+            include('errors/error.php');
+        } else {
+            $questions=get_one_question($questionId);
+            include('View/single_question.php');
+        }
+        break;
+    }
+
     default:{
         $error = 'Unknown Action';
         include ('errors/error.php');
