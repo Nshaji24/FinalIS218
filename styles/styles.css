@@ -45,6 +45,7 @@ body{
 
 }
 #nav_menu{
+    text-align: center;
     list-style-type:none;
     margin: 0;
     padding: 0;
@@ -63,4 +64,23 @@ body{
 .deleteBTN{
 
 }
+a {
+    text-align: center;
+    background-color: red;
+    box-shadow: 0 3px 0 darkred;
+    color: white;
+    padding: .1em .1em;
+    text-decoration: none;
+    text-transform: uppercase;
+
+
+}
+a:hover {
+    cursor: pointer;
+}
+.BTN:hover{
+    cursor:pointer;
+}
+
+
 

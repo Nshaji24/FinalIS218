@@ -4,6 +4,7 @@
 <nav> <ul id="nav_menu">
         <li><a href=".?action=show_login">Login</a></li>
         <li><a href=".?action=display_question_form&userId=<?php echo $userId ; ?>">Post a Question</a></li>
+        <a href=".?action=logout">Logout</a>
     </ul>
 </nav>
 <!--  <a href="../done/Questions_form.php?userId=<?php echo $userId ; ?>" Add Question></a> -->
@@ -61,5 +62,13 @@
     <input type="submit" value="Show all Questions">
 
 </form>
+<form action="index.php" method="post" name="show_user_questions">
+    <input type="hidden" name="action" value="display_question">
+    <input type="submit" value="Show Users Questions">
+
+</form>
+
+
+
 
 

@@ -5,6 +5,9 @@ require ('Model/accounts_db.php');
 require ('Model/questions_db.php');
 require ('Model/Registration.php');
 
+session_start();
+
+
 $action = filter_input(INPUT_POST,'action');
 if($action==NULL){
     $action = filter_input(INPUT_GET,'action');
@@ -14,8 +17,14 @@ if($action==NULL){
 }
 
 switch ($action){
-    case 'show_login': {
-        include('View/login.php');
+    case 'show_login':{
+
+        if($_SESSION['userId']){
+            header('Location: .?action=display_question');
+        }else{
+            include('View/login.php');
+        }
+
         break;
     }
 
@@ -33,7 +42,8 @@ switch ($action){
             if ($userId == false) {
                 header('Location: .?action=display_registration');
             } else {
-                header("Location: .?action=display_question&userId=$userId");
+                $_SESSION['userId']= $userId;
+                header("Location: .?action=display_question"); //&userId=$userId
             }
         }
         break;
@@ -202,7 +212,7 @@ switch ($action){
 
     }
     case 'display_question':{
-       $userId = filter_input(INPUT_GET,'userId');
+       $userId = $_SESSION['userId'];
        if ($userId==NULL || $userId <0){
            header('Location: .?action=show_login');
        }else{
@@ -273,6 +283,18 @@ switch ($action){
     case 'get_all_questions' : {
         $questions = get_all_questions();
         include ('View/display_questions.php');
+        break;
+    }
+    case 'logout': {
+
+        session_destroy();
+        $_SESSION = array();
+        $name = session_name();
+        $expire = strtotime('-1 year');
+
+        $params = session_get_cookie_params();
+        setcookie($name, '', $expire, $params['path'], $params['domain'],$params['secure'],$params['httponly']);
+        header('Location: .');
         break;
     }
 
